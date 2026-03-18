@@ -63,6 +63,13 @@
   .shiki,
   .shiki span {
     color: var(--shiki-dark) !important;
+  }
+
+  .shiki {
+    background-color: var(--shiki-dark-bg) !important;
+  }
+
+  .shiki span[style*='--shiki-dark-bg'] {
     background-color: var(--shiki-dark-bg) !important;
   }
 }

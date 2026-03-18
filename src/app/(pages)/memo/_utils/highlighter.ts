@@ -1,4 +1,8 @@
 import { createHighlighter } from 'shiki';
+import {
+  darkTheme,
+  lightTheme,
+} from '@/app/(pages)/memo/_utils/shikiThemes';
 
 const HIGHLIGHTER_LANGUAGES = [
   'plaintext',
@@ -13,7 +17,7 @@ const HIGHLIGHTER_LANGUAGES = [
 type HighLightLanguage = (typeof HIGHLIGHTER_LANGUAGES)[number];
 
 const highlighter = await createHighlighter({
-  themes: ['github-dark-default', 'github-light-default'],
+  themes: [darkTheme, lightTheme],
   langs: HIGHLIGHTER_LANGUAGES,
 });
 
@@ -37,6 +41,9 @@ function getHighlighterLanguage(lang: string): HighLightLanguage {
 export function highlightCodeToHtml(text: string, language: string) {
   return highlighter.codeToHtml(text, {
     lang: getHighlighterLanguage(language),
-    themes: { dark: 'github-dark-default', light: 'github-light-default' },
+    themes: {
+      dark: darkTheme.name,
+      light: lightTheme.name,
+    },
   });
 }
