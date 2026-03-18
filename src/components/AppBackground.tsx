@@ -7,16 +7,18 @@ export function AppBackground() {
         className={cn(
           'absolute inset-0',
           // sizing tokens
-          '[--grid-size:7.5rem]',
-          '[--dot-size:1.5rem]',
-          '[--dot-offset:calc(var(--dot-size)/2)]',
-          '[--frame-inset:clamp(0.75rem,2vw,1.5rem)]',
+          '[--grid-size:10rem]',
+          '[--dot-size:2rem]',
+          '[--dot-offset:calc(var(--dot-size)*2)]',
+          '[--frame-inset:clamp(0.5rem,2vw,1rem)]',
+          '[--grid-line-opacity:4%]',
+          '[--grid-dot-opacity:5%]',
           // Tailwind-provided colors via CSS vars (tailwindcss/theme.css)
-          '[--grid-line:color-mix(in_oklab,var(--color-slate-950)_6%,transparent)]',
-          '[--grid-dot:color-mix(in_oklab,var(--color-slate-950)_8%,transparent)]',
+          '[--grid-line:color-mix(in_oklab,var(--color-slate-950)_var(--grid-line-opacity),transparent)]',
+          '[--grid-dot:color-mix(in_oklab,var(--color-slate-950)_var(--grid-dot-opacity),transparent)]',
           '[--glow:color-mix(in_oklab,var(--color-neutral-400)_10%,transparent)]',
-          'dark:[--grid-line:color-mix(in_oklab,var(--color-slate-50)_6%,transparent)]',
-          'dark:[--grid-dot:color-mix(in_oklab,var(--color-slate-50)_8%,transparent)]',
+          'dark:[--grid-line:color-mix(in_oklab,var(--color-slate-50)_var(--grid-line-opacity),transparent)]',
+          'dark:[--grid-dot:color-mix(in_oklab,var(--color-slate-50)_var(--grid-dot-opacity),transparent)]',
           'dark:[--glow:color-mix(in_oklab,var(--color-neutral-400)_15%,transparent)]',
           // background layers
           'bg-[radial-gradient(1100px_520px_at_50%_-10%,var(--glow),transparent_60%),linear-gradient(to_right,var(--grid-line)_1px,transparent_1px),linear-gradient(to_bottom,var(--grid-line)_1px,transparent_1px),radial-gradient(circle_at_1px_1px,var(--grid-dot)_1px,transparent_1px)]',
