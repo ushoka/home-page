@@ -19,7 +19,7 @@ export const DraftStatusToast = async ({
       aria-label="Draft Mode"
       className={cn('fixed bottom-4 left-4', className)}
     >
-      <span className="flex items-center gap-2 rounded-lg border-2 border-gray-800 bg-gray-100 p-2 font-bold dark:border-white dark:bg-gray-800">
+      <span className="flex items-center gap-2 rounded-lg border-2 border-border-03 bg-surface-04 p-2 font-bold text-fg-01">
         Draft Mode
         {isEnabled && <ExitDraftModeButton />}
         {!isEnabled && process.env.NODE_ENV !== 'production' && (

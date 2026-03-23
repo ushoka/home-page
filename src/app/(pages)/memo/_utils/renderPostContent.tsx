@@ -121,8 +121,8 @@ function renderBlock({
       const { rich_text, language, caption } = block.code;
 
       return (
-        <div className="relative isolate my-6 border-2 border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
-          <span className="absolute z-10 right-0 top-0 inline-block font-mono rounded-bl-lg px-2 py-1 text-xs leading-none dark:bg-gray-800 bg-gray-100 text-gray-900 border-l-2 border-b-2 border-gray-200 dark:border-gray-700 dark:text-white">
+        <div className="relative isolate my-6 overflow-hidden rounded-lg border-2 border-border-01">
+          <span className="absolute top-0 right-0 z-10 inline-block rounded-bl-lg border-b-2 border-l-2 border-border-01 bg-surface-04 px-2 py-1 font-mono text-xs leading-none text-fg-01">
             {caption.length > 0 ? renderRichText(caption) : language}
           </span>
           <div
@@ -155,7 +155,7 @@ function renderBlock({
           originalHeight={image.height}
           alt=""
           sizes="800px"
-          className="mx-auto h-auto max-w-full rounded-lg border-2 border-gray-200 dark:border-gray-700 bg-white object-contain dark:bg-gray-900"
+          className="mx-auto h-auto max-w-full rounded-lg border-2 border-border-01 bg-surface-01 object-contain"
         />
       );
 
@@ -194,7 +194,7 @@ function renderRichText(richText: RichText): React.ReactNode {
         key={i}
         className={cn(
           code &&
-            'rounded-sm bg-gray-200 px-1.5 py-0.5 font-mono [font-weight:inherit] dark:bg-gray-700 before:content-none after:content-none',
+            'rounded-sm bg-surface-04 px-1.5 py-0.5 font-mono [font-weight:inherit] before:content-none after:content-none',
           bold && 'font-bold',
           italic && 'italic',
           strikethrough && 'line-through',
@@ -206,7 +206,7 @@ function renderRichText(richText: RichText): React.ReactNode {
             href={text.link.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-inherit hover:text-gray-400"
+            className="text-inherit hover:text-fg-03"
           >
             {text.content}
           </a>

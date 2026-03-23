@@ -39,9 +39,7 @@ const BIO_LIST = [
           <>
             <span className="font-bold">Eureka</span>:
             <br />
-            <span className="text-gray-600 dark:text-gray-300">
-              Front-end Engineer (intern)
-            </span>
+            <span className="text-fg-02">Front-end Engineer (intern)</span>
           </>
         ),
       },
@@ -50,9 +48,7 @@ const BIO_LIST = [
           <>
             <span className="font-bold">SHOWROOM</span>:
             <br />
-            <span className="text-gray-600 dark:text-gray-300">
-              Front-end Engineer (intern)
-            </span>
+            <span className="text-fg-02">Front-end Engineer (intern)</span>
           </>
         ),
       },
@@ -61,9 +57,7 @@ const BIO_LIST = [
           <>
             <span className="font-bold">Eureka</span>:
             <br />
-            <span className="text-gray-600 dark:text-gray-300">
-              Front-end Engineer
-            </span>
+            <span className="text-fg-02">Front-end Engineer</span>
           </>
         ),
         highlighted: true,
@@ -78,9 +72,7 @@ const BIO_LIST = [
           <>
             <span className="font-bold">Northeastern University (China)</span>:
             <br />
-            <span className="text-gray-600 dark:text-gray-300">
-              Digital Media
-            </span>
+            <span className="text-fg-02">Digital Media</span>
           </>
         ),
       },
@@ -89,9 +81,7 @@ const BIO_LIST = [
           <>
             <span className="font-bold">Nagoya University</span>:
             <br />
-            <span className="text-gray-600 dark:text-gray-300">
-              Society and Media Studies
-            </span>
+            <span className="text-fg-02">Society and Media Studies</span>
           </>
         ),
       },
@@ -100,9 +90,7 @@ const BIO_LIST = [
           <>
             <span className="font-bold">University of Tokyo</span>:
             <br />
-            <span className="text-gray-600 dark:text-gray-300">
-              Computer Graphics
-            </span>
+            <span className="text-fg-02">Computer Graphics</span>
           </>
         ),
         highlighted: true,
@@ -126,11 +114,11 @@ export default async function Home() {
           alt=""
           role="presentation"
           placeholder="blur"
-          className="rounded-full size-40 border-4 border-gray-800 object-cover dark:border-gray-100"
+          className="rounded-full size-40 border-4 border-border-03 object-cover"
         />
         <div className="mt-4 text-center sm:ml-4 sm:mt-0 sm:text-left">
           <h1 className="text-3xl font-bold tracking-wide font-display">
-            Usho Ka <span className="text-gray-400 dark:text-gray-600">/</span>
+            Usho Ka <span className="text-fg-03">/</span>
             <br />
             Yuxiao He
           </h1>
@@ -187,7 +175,7 @@ export default async function Home() {
         >
           &rdquo;
         </span>
-        <div className="space-y-4 rounded-lg border-2 border-dashed border-gray-900 p-4 md:p-8 md:text-lg dark:border-white tracking-wide">
+        <div className="space-y-4 rounded-lg border-2 border-dashed border-border-03 p-4 tracking-wide md:p-8 md:text-lg">
           <p>Hey there! I{"'"}m Usho, a web front-end engineer in Tokyo.</p>
           <p>
             My primary focus is on <Emphasize>React</Emphasize>,{' '}

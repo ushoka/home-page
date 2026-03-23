@@ -105,7 +105,7 @@ export default async function Post(props: MemoPageProps) {
           <div className="mb-8">
             <time
               dateTime={properties.Date.date.start}
-              className="mb-2 block text-gray-500 dark:text-gray-400"
+              className="mb-2 block text-fg-03"
             >
               {formatDate(properties.Date.date.start)}
             </time>
@@ -125,7 +125,7 @@ export default async function Post(props: MemoPageProps) {
                 originalHeight={coverImage.height}
                 alt=""
                 sizes="800px"
-                className="mx-auto h-auto w-full rounded-lg border-2 border-gray-200 dark:border-gray-700 bg-white object-contain dark:bg-gray-900"
+                className="mx-auto h-auto w-full rounded-lg border-2 border-border-01 bg-surface-01 object-contain"
               />
             )}
           </div>
@@ -133,7 +133,7 @@ export default async function Post(props: MemoPageProps) {
           {properties.UpdatedAt.date && (
             <time
               dateTime={properties.UpdatedAt.date.start}
-              className="mt-12 block italic text-gray-500 dark:text-gray-400"
+              className="mt-12 block italic text-fg-03"
             >
               Updated on {formatDate(properties.UpdatedAt.date.start)}
             </time>

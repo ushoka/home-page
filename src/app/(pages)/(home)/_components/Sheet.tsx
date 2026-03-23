@@ -14,12 +14,12 @@ export const Sheet: React.FC<SheetProps> = ({
   return (
     <article
       className={cn(
-        'inline-flex flex-col overflow-hidden rounded-lg border-2 border-gray-800 bg-white px-8 py-4 text-gray-900 dark:border-white dark:bg-gray-800 dark:text-white dark:selection:bg-gray-500',
+        'inline-flex flex-col overflow-hidden rounded-lg border-2 border-border-03 bg-surface-02 px-8 py-4 text-fg-01 selection:bg-selection',
         className,
       )}
     >
       <h3 className="text-xl font-bold font-display uppercase">{heading}</h3>
-      <div className="mt-2 border-t border-dashed border-gray-400 dark:border-gray-500" />
+      <div className="mt-2 border-t border-dashed border-border-02" />
       <div className="mt-4 text-sm">{children}</div>
     </article>
   );

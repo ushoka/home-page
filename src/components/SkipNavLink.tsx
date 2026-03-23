@@ -9,7 +9,7 @@ export const SkipNavLink: React.FC<{ className?: string }> = ({
     <a
       href={`#${SKIP_NAV_MAIN_CONTENT_ID}`}
       className={cn(
-        'fixed left-4 top-0 inline-block -translate-y-full bg-white px-3 py-2 font-bold transition-transform focus:translate-y-2 motion-reduce:transition-none dark:bg-gray-900',
+        'fixed left-4 top-0 inline-block -translate-y-full bg-surface-01 px-3 py-2 font-bold text-fg-01 transition-transform focus:translate-y-2 motion-reduce:transition-none',
         className,
       )}
     >

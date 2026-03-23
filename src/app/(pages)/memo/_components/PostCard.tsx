@@ -27,7 +27,7 @@ export const PostCard = <T extends string>(props: {
     <Link
       href={href}
       className={cn(
-        'inline-block overflow-hidden rounded-lg border-4 bg-white text-gray-900 no-underline shadow-md motion-safe:hover:scale-110 motion-safe:hover:shadow-xl dark:bg-gray-800 dark:text-white duration-300',
+        'inline-block overflow-hidden rounded-lg border-4 bg-surface-02 text-fg-01 no-underline shadow-md duration-300 motion-safe:hover:scale-110 motion-safe:hover:shadow-xl',
         tags[0] && getTagCardBorderColor(tags[0].color),
         className,
       )}
@@ -42,12 +42,12 @@ export const PostCard = <T extends string>(props: {
               width={600}
               originalWidth={image.originalWidth}
               originalHeight={image.originalHeight}
-              className="aspect-5/3 h-auto w-full object-cover bg-gray-100"
+              className="aspect-5/3 h-auto w-full bg-surface-04 object-cover"
             />
           ) : (
             <div
               aria-hidden
-              className="flex aspect-5/3 h-auto w-full font-display items-center justify-center bg-gray-100 dark:bg-gray-900 p-4 text-7xl font-bold tracking-wider text-gray-500 dark:text-gray-300"
+              className="flex aspect-5/3 h-auto w-full items-center justify-center bg-surface-04 p-4 font-display text-7xl font-bold tracking-wider text-fg-03 dark:bg-surface-01"
             >
               {emoji ?? 'NO IMAGE'}
             </div>
@@ -57,7 +57,7 @@ export const PostCard = <T extends string>(props: {
           <div>
             <h2 className="text-xl font-bold">{title}</h2>
             {date && (
-              <div className="mt-1 text-base text-gray-500 dark:text-gray-300">
+              <div className="mt-1 text-base text-fg-03">
                 {formatDate(date)}
               </div>
             )}

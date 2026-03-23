@@ -20,6 +20,39 @@
   --color-gray-950: var(--color-neutral-950);
 }
 
+@theme inline {
+  --color-surface-01: light-dark(var(--color-white), var(--color-gray-900));
+  --color-surface-02: light-dark(var(--color-white), var(--color-gray-800));
+  --color-surface-03: light-dark(var(--color-gray-50), var(--color-gray-900));
+  --color-surface-04: light-dark(var(--color-gray-100), var(--color-gray-800));
+
+  --color-fg-01: light-dark(var(--color-gray-900), var(--color-white));
+  --color-fg-02: light-dark(var(--color-gray-600), var(--color-gray-300));
+  --color-fg-03: light-dark(var(--color-gray-500), var(--color-gray-400));
+  --color-fg-on-accent: var(--color-white);
+
+  --color-border-01: light-dark(var(--color-gray-200), var(--color-gray-700));
+  --color-border-02: light-dark(var(--color-gray-400), var(--color-gray-500));
+  --color-border-03: light-dark(var(--color-gray-800), var(--color-white));
+
+  --color-accent: var(--color-red-400);
+  --color-accent-hover: var(--color-red-500);
+  --color-selection: light-dark(var(--color-red-100), var(--color-gray-600));
+
+  --color-decor-grid-line: light-dark(
+    color-mix(in oklab, var(--color-slate-950) 4%, transparent),
+    color-mix(in oklab, var(--color-slate-50) 4%, transparent)
+  );
+  --color-decor-grid-dot: light-dark(
+    color-mix(in oklab, var(--color-slate-950) 5%, transparent),
+    color-mix(in oklab, var(--color-slate-50) 5%, transparent)
+  );
+  --color-decor-grid-glow: light-dark(
+    color-mix(in oklab, var(--color-neutral-400) 10%, transparent),
+    color-mix(in oklab, var(--color-neutral-400) 15%, transparent)
+  );
+}
+
 /*
   The default border color has changed to `currentColor` in Tailwind CSS v4,
   so we've added these compatibility styles to make sure everything still
@@ -34,7 +67,7 @@
   ::before,
   ::backdrop,
   ::file-selector-button {
-    border-color: var(--color-gray-200, currentColor);
+    border-color: var(--color-border-01, currentColor);
   }
 }
 
@@ -45,7 +78,7 @@
   }
 
   body {
-    @apply box-border font-sans h-full bg-white text-gray-900 selection:bg-red-100 dark:bg-gray-900 dark:text-white dark:selection:bg-gray-600;
+    @apply box-border h-full bg-surface-01 font-sans text-fg-01 selection:bg-selection;
     tab-size: 2;
   }
 
@@ -55,7 +88,7 @@
   }
 
   a {
-    @apply underline hover:text-gray-400 transition motion-reduce:transition-none;
+    @apply underline transition hover:text-fg-03 motion-reduce:transition-none;
   }
 }
 
@@ -69,7 +102,7 @@
     background-color: var(--shiki-dark-bg) !important;
   }
 
-  .shiki span[style*='--shiki-dark-bg'] {
+  .shiki span[style*="--shiki-dark-bg"] {
     background-color: var(--shiki-dark-bg) !important;
   }
 }

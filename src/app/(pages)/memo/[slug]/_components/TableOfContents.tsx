@@ -97,7 +97,7 @@ export const TableOfContents: React.FC<{
     <aside
       aria-labelledby="toc"
       className={cn(
-        'w-60 max-w-max overflow-auto rounded-lg border-2 border-dashed border-gray-500 bg-gray-50 p-2 dark:border-gray-100 dark:bg-gray-900 font-display',
+        'w-60 max-w-max overflow-auto rounded-lg border-2 border-dashed border-border-02 bg-surface-03 p-2 font-display',
         className,
       )}
     >
@@ -106,7 +106,7 @@ export const TableOfContents: React.FC<{
           <span
             aria-hidden="true"
             className={cn(
-              'pointer-events-none absolute hidden w-0.75 rounded-sm bg-red-400 transition-[top,bottom,left,right,opacity] duration-200 ease-out',
+              'pointer-events-none absolute hidden w-0.75 rounded-sm bg-accent transition-[top,bottom,left,right,opacity] duration-200 ease-out',
               '[@supports(position-anchor:--toc-active)]:block',
               '[@supports(position-anchor:--toc-active)]:opacity-100',
               '[@supports(position-anchor:--toc-active)]:[position-anchor:--toc-active]',
@@ -123,11 +123,9 @@ export const TableOfContents: React.FC<{
                   aria-current={activeIndex === index ? 'location' : false}
                   className={cn(
                     'relative block px-2 text-base leading-[1.1] no-underline hover:underline',
-                    toc.level === 3
-                      ? 'ml-4 py-0.5 text-sm text-gray-600 dark:text-gray-300'
-                      : 'py-1',
+                    toc.level === 3 ? 'ml-4 py-0.5 text-sm text-fg-02' : 'py-1',
                     activeIndex === index &&
-                      'text-red-400 dark:text-red-400 before:bg-red-400 [@supports(position-anchor:--toc-active)]:[anchor-name:--toc-active]',
+                      'text-accent before:bg-accent [@supports(position-anchor:--toc-active)]:[anchor-name:--toc-active]',
                     'before:absolute before:bottom-1 before:left-0 before:top-1 before:block before:w-0.75 before:rounded-sm before:transition-colors before:content-[""]',
                     '[@supports(position-anchor:--toc-active)]:before:hidden',
                   )}

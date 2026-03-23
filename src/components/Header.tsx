@@ -26,7 +26,7 @@ export const Header: React.FC<{ className?: string }> = ({ className }) => {
                   href={href}
                   className={cn(
                     'p-2 text-xl font-bold font-display uppercase',
-                    isCurrent && 'text-red-400 hover:text-red-500',
+                    isCurrent && 'text-accent hover:text-accent-hover',
                   )}
                 >
                   {label}
