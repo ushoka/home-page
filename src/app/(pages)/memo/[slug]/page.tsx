@@ -11,6 +11,7 @@ import {
   TableOfContents,
   type Toc,
 } from '@/app/(pages)/memo/[slug]/_components/TableOfContents';
+import { Article } from '@/components/Article';
 import { getImageUrl } from '@/libs/api/cloudinary';
 import type { Block } from '@/libs/api/notion/api/fetchBlocks';
 import { convertRichTextToPlainText } from '@/libs/api/notion/utils';
@@ -101,7 +102,7 @@ export default async function Post(props: MemoPageProps) {
             tableOfContents={tableOfContents}
           />
         )}
-        <article className="prose prose-neutral relative w-full wrap-break-words lg:prose-lg dark:prose-invert prose-figcaption:mt-[0.5em] prose-pre:m-0 prose-h1:font-display prose-h2:font-display prose-h3:font-display">
+        <Article className="prose-figcaption:mt-[0.5em] prose-pre:m-0">
           <div className="mb-8">
             <time
               dateTime={properties.Date.date.start}
@@ -138,7 +139,7 @@ export default async function Post(props: MemoPageProps) {
               Updated on {formatDate(properties.UpdatedAt.date.start)}
             </time>
           )}
-        </article>
+        </Article>
       </div>
     </>
   );
