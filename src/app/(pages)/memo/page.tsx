@@ -36,7 +36,7 @@ export default async function MemoList() {
           return (
             <li
               key={post.id}
-              className="z-0 rotate-0 motion-safe:hover:odd:-rotate-3 motion-safe:hover:even:rotate-3 duration-300 motion-safe:hover:z-10"
+              className="rotate-0 scale-100 shadow-md z-0 motion-safe:transition-all duration-300 motion-safe:hover:scale-105 motion-safe:hover:shadow-xl motion-safe:hover:z-10"
             >
               <PostCard
                 title={convertRichTextToPlainText(post.properties.Page.title)}

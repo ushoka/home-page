@@ -27,7 +27,7 @@ export const PostCard = <T extends string>(props: {
     <Link
       href={href}
       className={cn(
-        'inline-block overflow-hidden rounded-lg border-4 bg-surface-02 text-fg-01 no-underline shadow-md duration-300 motion-safe:hover:scale-110 motion-safe:hover:shadow-xl',
+        'inline-block overflow-hidden rounded-lg border-4 bg-surface-02 text-fg-01 no-underline',
         tags[0] && getTagCardBorderColor(tags[0].color),
         className,
       )}
