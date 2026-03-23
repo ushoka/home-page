@@ -6,7 +6,6 @@ import { LinkedList } from '@/app/(pages)/(home)/_components/LinkedList';
 import { Sheet } from '@/app/(pages)/(home)/_components/Sheet';
 import { SocialLink } from '@/app/(pages)/(home)/_components/SocialLink';
 import AvatarImage from '@/app/(pages)/(home)/_images/avatar.jpg';
-import { HeadingAnchor } from '@/components/HeadingAnchor';
 import { GitHubIcon } from '@/components/icons/GitHubIcon';
 import { MediumIcon } from '@/components/icons/MediumIcon';
 import { XIcon } from '@/components/icons/XIcon';
@@ -210,9 +209,6 @@ export default async function Home() {
         </div>
       </div>
       <section className="flex flex-col items-center">
-        <HeadingAnchor as="h2" className="text-2xl font-bold font-display">
-          bio
-        </HeadingAnchor>
         <div className="mt-4 flex flex-wrap justify-center gap-8">
           {BIO_LIST.map(bio => (
             <Sheet

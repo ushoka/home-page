@@ -8,6 +8,7 @@ import type { RichText } from '@/libs/api/notion/schema/RichTextSchema';
 import { convertRichTextToPlainText } from '@/libs/api/notion/utils';
 import { cn } from '@/libs/utils/classNames';
 import { generateSlugFromText } from '@/libs/utils/string';
+import { HeadingAnchor } from '@/components/HeadingAnchor';
 
 type Images = Awaited<ReturnType<typeof fetchPostImages>>;
 
@@ -69,9 +70,9 @@ function renderBlock({
       const text = convertRichTextToPlainText(block.heading_2.rich_text);
       headingsBuffer.push({ level: 2, text });
       return (
-        <h2 id={generateSlugFromText(text)}>
+        <HeadingAnchor as="h2" id={generateSlugFromText(text)}>
           {renderRichText(block.heading_2.rich_text)}
-        </h2>
+        </HeadingAnchor>
       );
     }
     case 'heading_3': {
@@ -82,9 +83,12 @@ function renderBlock({
         .find(heading => heading.level === 2);
       headingsBuffer.push({ level: 3, text });
       return (
-        <h3 id={generateSlugFromText(nearestHeading2?.text, text)}>
+        <HeadingAnchor
+          as="h3"
+          id={generateSlugFromText(nearestHeading2?.text, text)}
+        >
           {renderRichText(block.heading_3.rich_text)}
-        </h3>
+        </HeadingAnchor>
       );
     }
     case 'bulleted_list_item':
