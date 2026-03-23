@@ -3,6 +3,12 @@ import { SCROLL_CONTAINER_ID } from '@/libs/constants/scroll';
 
 type ScrollDirection = 'up' | 'down' | null;
 
+function getPreferredScrollBehavior(): ScrollBehavior {
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    ? 'instant'
+    : 'smooth';
+}
+
 export function useScroll(onScroll?: () => void): {
   scrollTo: (position: number) => void;
   scrollDirection: ScrollDirection;
@@ -34,7 +40,10 @@ export function useScroll(onScroll?: () => void): {
 
   const scrollTo = (position: number) => {
     const scrollContainer = document.getElementById(SCROLL_CONTAINER_ID);
-    scrollContainer?.scrollTo({ top: position, behavior: 'smooth' });
+    scrollContainer?.scrollTo({
+      top: position,
+      behavior: getPreferredScrollBehavior(),
+    });
   };
 
   return { scrollDirection, scrollTo };

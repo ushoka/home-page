@@ -106,7 +106,7 @@ export const TableOfContents: React.FC<{
           <span
             aria-hidden="true"
             className={cn(
-              'pointer-events-none absolute hidden w-0.75 rounded-sm bg-accent transition-[top,bottom,left,right,opacity] duration-200 ease-out',
+              'pointer-events-none absolute hidden w-0.75 rounded-sm bg-accent transition-[top,bottom,left,right,opacity] duration-200 ease-out motion-reduce:transition-none',
               '[@supports(position-anchor:--toc-active)]:block',
               '[@supports(position-anchor:--toc-active)]:opacity-100',
               '[@supports(position-anchor:--toc-active)]:[position-anchor:--toc-active]',
@@ -126,7 +126,7 @@ export const TableOfContents: React.FC<{
                     toc.level === 3 ? 'ml-4 py-0.5 text-sm text-fg-02' : 'py-1',
                     activeIndex === index &&
                       'text-accent before:bg-accent [@supports(position-anchor:--toc-active)]:[anchor-name:--toc-active]',
-                    'before:absolute before:bottom-1 before:left-0 before:top-1 before:block before:w-0.75 before:rounded-sm before:transition-colors before:content-[""]',
+                    'before:absolute before:bottom-1 before:left-0 before:top-1 before:block before:w-0.75 before:rounded-sm before:motion-safe:transition-colors before:content-[""]',
                     '[@supports(position-anchor:--toc-active)]:before:hidden',
                   )}
                 >

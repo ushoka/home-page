@@ -26,6 +26,13 @@
 - Icon-only buttons must have accessible label via `aria-label` or visually hidden text
 - Links must have descriptive text (avoid "click here")
 
+## Reduced Motion
+
+- Prefer CSS-based reduced-motion handling with `motion-safe:*`, `motion-reduce:*`, or `@media (prefers-reduced-motion)`
+- Keep reduced-motion overrides local to the component when possible
+- Use JavaScript only when CSS cannot express the behavior, such as programmatic scrolling
+- In reduced motion, remove non-essential transitions and movement while keeping the UI understandable
+
 ## Development
 
 A11y reporter (`@axe-core/react`) runs automatically in development mode to catch issues.

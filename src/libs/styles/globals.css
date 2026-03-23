@@ -88,7 +88,7 @@
   }
 
   a {
-    @apply underline transition hover:text-fg-03 motion-reduce:transition-none;
+    @apply underline motion-safe:transition-colors hover:text-fg-03;
   }
 }
 
