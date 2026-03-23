@@ -122,7 +122,7 @@ export default async function Home() {
             <br />
             Yuxiao He
           </h1>
-          <ul className="mt-2 flex flex-col gap-1">
+          <ul className="mt-2 flex flex-col gap-1 items-center sm:items-start">
             <li className="flex">
               <SocialLink
                 href="https://twitter.com/usho_ka"
