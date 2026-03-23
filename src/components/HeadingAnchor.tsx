@@ -19,10 +19,7 @@ export const HeadingAnchor: React.FC<HeadingAnchorProps> = ({
 
   return (
     <Component id={id} className={className}>
-      <a
-        href={`#${id}`}
-        className="uppercase tracking-wide text-inherit no-underline hover:underline"
-      >
+      <a href={`#${id}`} className="no-underline hover:underline">
         {children}
       </a>
     </Component>
