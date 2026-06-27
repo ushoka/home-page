@@ -166,7 +166,11 @@ export const darkTheme: ThemeRegistration = {
       settings: { foreground: darkColors.orange },
     },
     {
-      scope: ['markup.heading', 'markup.heading entity.name', 'markup.inline.raw'],
+      scope: [
+        'markup.heading',
+        'markup.heading entity.name',
+        'markup.inline.raw',
+      ],
       settings: { foreground: darkColors.blue },
     },
     { scope: 'markup.quote', settings: { foreground: darkColors.green } },
@@ -373,7 +377,11 @@ export const lightTheme: ThemeRegistration = {
       settings: { foreground: lightColors.orange },
     },
     {
-      scope: ['markup.heading', 'markup.heading entity.name', 'markup.inline.raw'],
+      scope: [
+        'markup.heading',
+        'markup.heading entity.name',
+        'markup.inline.raw',
+      ],
       settings: { foreground: lightColors.blue },
     },
     { scope: 'markup.quote', settings: { foreground: lightColors.green } },

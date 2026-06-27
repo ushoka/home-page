@@ -118,7 +118,7 @@ export default async function Post(props: MemoPageProps) {
                 ))}
               </div>
             )}
-            <hr className='border' />
+            <hr className="border" />
             {coverImage && (
               <PostImage
                 preload

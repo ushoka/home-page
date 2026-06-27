@@ -2,18 +2,18 @@
 
 ## Tech Stack
 
-| Category | Technology |
-|----------|------------|
-| Framework | Next.js 16 (App Router, React Server Components) |
-| React | v19 with React Compiler enabled |
-| TypeScript | v5.9 (strict mode, `noUncheckedIndexedAccess`) |
-| Styling | Tailwind CSS 4 with `@tailwindcss/typography` |
-| Formatting | Biome |
-| Linting | ESLint with `eslint-config-next` |
-| Validation | Zod |
-| CMS | Notion API |
-| Images | Cloudinary |
-| Hosting | Vercel |
+| Category   | Technology                                       |
+| ---------- | ------------------------------------------------ |
+| Framework  | Next.js 16 (App Router, React Server Components) |
+| React      | v19 with React Compiler enabled                  |
+| TypeScript | v5.9 (strict mode, `noUncheckedIndexedAccess`)   |
+| Styling    | Tailwind CSS 4 with `@tailwindcss/typography`    |
+| Formatting | Biome                                            |
+| Linting    | ESLint with `eslint-config-next`                 |
+| Validation | Zod                                              |
+| CMS        | Notion API                                       |
+| Images     | Cloudinary                                       |
+| Hosting    | Vercel                                           |
 
 ## Project Structure
 
@@ -49,10 +49,10 @@ memo/
 
 ## Next.js Configuration
 
-| Feature | Config | Purpose |
-|---------|--------|---------|
-| React Compiler | `reactCompiler: true` | Automatic memoization |
-| View Transitions | `experimental.viewTransition` | Page transition animations |
-| Component Caching | `cacheComponents: true` | Server component caching |
-| Draft Mode | Built-in | Content preview from Notion |
-| On-demand Revalidation | API routes in `src/app/api/revalidate/` | Cache invalidation |
+| Feature                | Config                                  | Purpose                     |
+| ---------------------- | --------------------------------------- | --------------------------- |
+| React Compiler         | `reactCompiler: true`                   | Automatic memoization       |
+| View Transitions       | `experimental.viewTransition`           | Page transition animations  |
+| Component Caching      | `cacheComponents: true`                 | Server component caching    |
+| Draft Mode             | Built-in                                | Content preview from Notion |
+| On-demand Revalidation | API routes in `src/app/api/revalidate/` | Cache invalidation          |

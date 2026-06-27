@@ -11,7 +11,7 @@ Personal portfolio and blog site built with Next.js 16, React 19, and TypeScript
 | `npm run type-check` | TypeScript check  |
 | `npm run lint`       | ESLint check      |
 | `npm run lint:fix`   | Fix ESLint errors |
-| `npm run format`     | Format with Biome |
+| `npm run format`     | Format with Oxfmt |
 
 ## Guidelines
 

@@ -2,7 +2,7 @@
 
 https://usho.dev
 
-This my personal home page.
+My personal home page.
 
 ## Technologies
 

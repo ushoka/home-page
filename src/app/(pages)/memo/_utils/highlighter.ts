@@ -1,8 +1,5 @@
 import { createHighlighter } from 'shiki';
-import {
-  darkTheme,
-  lightTheme,
-} from '@/app/(pages)/memo/_utils/shikiThemes';
+import { darkTheme, lightTheme } from '@/app/(pages)/memo/_utils/shikiThemes';
 
 const HIGHLIGHTER_LANGUAGES = [
   'plaintext',

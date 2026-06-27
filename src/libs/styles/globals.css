@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 @plugin "@tailwindcss/typography";
 
 @theme {
@@ -102,7 +102,7 @@
     background-color: var(--shiki-dark-bg) !important;
   }
 
-  .shiki span[style*="--shiki-dark-bg"] {
+  .shiki span[style*='--shiki-dark-bg'] {
     background-color: var(--shiki-dark-bg) !important;
   }
 }
