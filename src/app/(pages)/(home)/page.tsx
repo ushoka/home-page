@@ -6,9 +6,12 @@ import { LinkedList } from '@/app/(pages)/(home)/_components/LinkedList';
 import { Sheet } from '@/app/(pages)/(home)/_components/Sheet';
 import { SocialLink } from '@/app/(pages)/(home)/_components/SocialLink';
 import AvatarImage from '@/app/(pages)/(home)/_images/avatar.jpg';
+import { PostCard } from '@/app/(pages)/memo/_components/PostCard';
+import { getPosts } from '@/app/(pages)/memo/_utils/getPosts';
 import { GitHubIcon } from '@/components/icons/GitHubIcon';
 import { MediumIcon } from '@/components/icons/MediumIcon';
 import { XIcon } from '@/components/icons/XIcon';
+import { convertRichTextToPlainText } from '@/libs/api/notion/utils';
 import { sharedMetadata } from '@/libs/utils/meta';
 
 export const metadata: Metadata = {
@@ -103,6 +106,8 @@ const BIO_LIST = [
 }[];
 
 export default async function Home() {
+  const posts = await getPosts();
+
   return (
     <div className="max-w-2xl mx-auto flex flex-col items-center gap-10 pb-8">
       <section className="mx-4 flex flex-col items-center justify-center sm:flex-row">
@@ -208,6 +213,27 @@ export default async function Home() {
             </Sheet>
           ))}
         </div>
+      </section>
+      <section className="w-full">
+        <h2 className="font-display text-xl font-bold uppercase text-center">memo</h2>
+        <ul className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
+          {posts?.map(post => (
+            <li
+              key={post.id}
+              className="rotate-0 scale-100 shadow-md z-0 motion-safe:transition-all duration-300 motion-safe:hover:scale-105 motion-safe:hover:shadow-xl motion-safe:hover:z-10"
+            >
+              <PostCard
+                title={convertRichTextToPlainText(post.properties.Page.title)}
+                href={`/memo/${convertRichTextToPlainText(
+                  post.properties.Slug.rich_text,
+                )}`}
+                date={post.properties.Date.date.start}
+                tags={post.properties.Tags.multi_select}
+                className="h-full w-full"
+              />
+            </li>
+          ))}
+        </ul>
       </section>
     </div>
   );

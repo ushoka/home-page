@@ -6,7 +6,6 @@ import { cn } from '@/libs/utils/classNames';
 
 const navItems = [
   { label: 'Home', href: '/', highlightRegex: /^\/?$/ },
-  { label: 'Memo', href: '/memo', highlightRegex: /^\/memo.*/ },
   { label: 'Job', href: '/job', highlightRegex: /^\/job$/ },
 ] as const;
 

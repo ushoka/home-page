@@ -46,13 +46,13 @@ export async function POST(request: NextRequest) {
 
   const postPath = `/memo/${slug}`;
 
-  revalidatePath('/memo');
+  revalidatePath('/');
   revalidatePath(postPath);
 
   return Response.json(
     {
       revalidated: true,
-      message: `Revalidated /memo and ${postPath}`,
+      message: `Revalidated / and ${postPath}`,
     },
     { status: 200 },
   );

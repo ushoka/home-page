@@ -3,5 +3,5 @@ import { redirect } from 'next/navigation';
 
 export async function GET() {
   (await draftMode()).disable();
-  redirect('/memo');
+  redirect('/');
 }
