@@ -1,18 +1,9 @@
-import { getTagColor } from '@/app/(pages)/memo/_utils/tags';
-import { cn } from '@/libs/utils/classNames';
-
 export const PostTag: React.FC<{
   name: string;
-  color: string;
-}> = ({ name, color }) => {
+}> = ({ name }) => {
   return (
-    <span
-      className={cn(
-        'inline-block rounded-3xl px-2.5 py-1 font-mono text-xs',
-        getTagColor(color),
-      )}
-    >
-      {name}
+    <span className="inline-block border-border-02 font-mono text-xs text-fg-03">
+      #{name}
     </span>
   );
 };

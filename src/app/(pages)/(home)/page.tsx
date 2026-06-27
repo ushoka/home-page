@@ -201,27 +201,25 @@ export default async function Home() {
           </p>
         </div>
       </div>
-      <section className="flex flex-col items-center">
-        <div className="mt-4 flex flex-wrap justify-center gap-8">
+      <section className="w-full">
+        <h2 className="font-display text-xl font-bold uppercase text-center">
+          bio
+        </h2>
+        <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
           {BIO_LIST.map(bio => (
-            <Sheet
-              key={bio.heading}
-              heading={bio.heading}
-              className="flex-[1_1_100%] sm:flex-[1_0_20rem]"
-            >
+            <Sheet key={bio.heading} heading={bio.heading}>
               <LinkedList items={bio.items} />
             </Sheet>
           ))}
         </div>
       </section>
       <section className="w-full">
-        <h2 className="font-display text-xl font-bold uppercase text-center">memo</h2>
-        <ul className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <h2 className="font-display text-xl font-bold uppercase text-center">
+          memo
+        </h2>
+        <ul className="mt-4 flex flex-col gap-2">
           {posts?.map(post => (
-            <li
-              key={post.id}
-              className="rotate-0 scale-100 shadow-md z-0 motion-safe:transition-all duration-300 motion-safe:hover:scale-105 motion-safe:hover:shadow-xl motion-safe:hover:z-10"
-            >
+            <li key={post.id}>
               <PostCard
                 title={convertRichTextToPlainText(post.properties.Page.title)}
                 href={`/memo/${convertRichTextToPlainText(
@@ -229,7 +227,7 @@ export default async function Home() {
                 )}`}
                 date={post.properties.Date.date.start}
                 tags={post.properties.Tags.multi_select}
-                className="h-full w-full"
+                className="h-full w-full rotate-0 scale-100 shadow-md z-0 motion-safe:transition-all duration-250 motion-safe:hover:scale-105 motion-safe:hover:shadow-xl motion-safe:hover:z-10"
               />
             </li>
           ))}

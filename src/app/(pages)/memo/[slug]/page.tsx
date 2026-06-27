@@ -104,20 +104,21 @@ export default async function Post(props: MemoPageProps) {
         )}
         <Article className="prose-figcaption:mt-[0.5em] prose-pre:m-0">
           <div className="mb-8">
+            <h1>{title}</h1>
             <time
               dateTime={properties.Date.date.start}
-              className="mb-2 block text-fg-03"
+              className="mb-1 block text-fg-02"
             >
               {formatDate(properties.Date.date.start)}
             </time>
             {properties.Tags.multi_select.length > 0 && (
-              <div className="mb-3 space-x-2">
+              <div className="space-x-2">
                 {properties.Tags.multi_select.map(tag => (
-                  <PostTag key={tag.name} name={tag.name} color={tag.color} />
+                  <PostTag key={tag.name} name={tag.name} />
                 ))}
               </div>
             )}
-            <h1>{title}</h1>
+            <hr className='border' />
             {coverImage && (
               <PostImage
                 preload
