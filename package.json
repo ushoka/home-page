@@ -37,7 +37,7 @@
     "eslint": "^10.6.0",
     "eslint-config-next": "16.2.9",
     "oxfmt": "0.56.0",
-    "postcss": "8.5.15",
+    "postcss": "8.5.23",
     "shiki": "4.3.0",
     "tailwindcss": "4.3.1"
   },
