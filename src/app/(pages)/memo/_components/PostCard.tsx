@@ -1,17 +1,20 @@
 import type { Route } from 'next';
 import Link from 'next/link';
+import { ViewTransition } from 'react';
 import { PostTag } from '@/app/(pages)/memo/_components/PostTag';
+import { memoTitleViewTransitionName } from '@/app/(pages)/memo/_utils/viewTransitionNames';
 import { cn } from '@/libs/utils/classNames';
 import { formatDate } from '@/libs/utils/date';
 
 export const PostCard = <T extends string>(props: {
   title: string;
+  slug: string;
   href: Route<T>;
   date: string;
   tags: { name: string }[];
   className?: string;
 }) => {
-  const { title, href, date, tags, className } = props;
+  const { title, slug, href, date, tags, className } = props;
 
   return (
     <Link
@@ -23,7 +26,9 @@ export const PostCard = <T extends string>(props: {
       )}
     >
       <article className="p-3 flex flex-col gap-1">
-        <h3 className="text-lg font-bold">{title}</h3>
+        <ViewTransition name={memoTitleViewTransitionName(slug)}>
+          <h3 className="text-lg font-bold">{title}</h3>
+        </ViewTransition>
         {date && <div className="text-sm text-fg-02">{formatDate(date)}</div>}
         {tags.length > 0 && (
           <ul className="flex flex-wrap gap-2">

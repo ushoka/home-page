@@ -21,36 +21,27 @@
 }
 
 @theme inline {
-  --color-surface-01: light-dark(var(--color-white), var(--color-gray-900));
-  --color-surface-02: light-dark(var(--color-white), var(--color-gray-800));
-  --color-surface-03: light-dark(var(--color-gray-50), var(--color-gray-900));
-  --color-surface-04: light-dark(var(--color-gray-100), var(--color-gray-800));
+  --color-surface-01: var(--surface-01);
+  --color-surface-02: var(--surface-02);
+  --color-surface-03: var(--surface-03);
+  --color-surface-04: var(--surface-04);
 
-  --color-fg-01: light-dark(var(--color-gray-900), var(--color-white));
-  --color-fg-02: light-dark(var(--color-gray-600), var(--color-gray-300));
-  --color-fg-03: light-dark(var(--color-gray-500), var(--color-gray-400));
+  --color-fg-01: var(--fg-01);
+  --color-fg-02: var(--fg-02);
+  --color-fg-03: var(--fg-03);
   --color-fg-on-accent: var(--color-white);
 
-  --color-border-01: light-dark(var(--color-gray-200), var(--color-gray-700));
-  --color-border-02: light-dark(var(--color-gray-400), var(--color-gray-500));
-  --color-border-03: light-dark(var(--color-gray-800), var(--color-white));
+  --color-border-01: var(--border-01);
+  --color-border-02: var(--border-02);
+  --color-border-03: var(--border-03);
 
   --color-accent: var(--color-red-400);
   --color-accent-hover: var(--color-red-500);
-  --color-selection: light-dark(var(--color-red-100), var(--color-gray-600));
+  --color-selection: var(--selection);
 
-  --color-decor-grid-line: light-dark(
-    color-mix(in oklab, var(--color-slate-950) 4%, transparent),
-    color-mix(in oklab, var(--color-slate-50) 4%, transparent)
-  );
-  --color-decor-grid-dot: light-dark(
-    color-mix(in oklab, var(--color-slate-950) 5%, transparent),
-    color-mix(in oklab, var(--color-slate-50) 5%, transparent)
-  );
-  --color-decor-grid-glow: light-dark(
-    color-mix(in oklab, var(--color-neutral-400) 10%, transparent),
-    color-mix(in oklab, var(--color-neutral-400) 15%, transparent)
-  );
+  --color-decor-grid-line: var(--decor-grid-line);
+  --color-decor-grid-dot: var(--decor-grid-dot);
+  --color-decor-grid-glow: var(--decor-grid-glow);
 }
 
 /*
@@ -75,6 +66,125 @@
   html {
     @apply h-full;
     color-scheme: light dark;
+
+    --surface-01-light: var(--color-white);
+    --surface-01-dark: var(--color-gray-900);
+    --surface-02-light: var(--color-white);
+    --surface-02-dark: var(--color-gray-800);
+    --surface-03-light: var(--color-gray-50);
+    --surface-03-dark: var(--color-gray-900);
+    --surface-04-light: var(--color-gray-100);
+    --surface-04-dark: var(--color-gray-800);
+
+    --fg-01-light: var(--color-gray-900);
+    --fg-01-dark: var(--color-white);
+    --fg-02-light: var(--color-gray-600);
+    --fg-02-dark: var(--color-gray-300);
+    --fg-03-light: var(--color-gray-500);
+    --fg-03-dark: var(--color-gray-400);
+
+    --border-01-light: var(--color-gray-200);
+    --border-01-dark: var(--color-gray-700);
+    --border-02-light: var(--color-gray-400);
+    --border-02-dark: var(--color-gray-500);
+    --border-03-light: var(--color-gray-800);
+    --border-03-dark: var(--color-white);
+
+    --selection-light: var(--color-red-100);
+    --selection-dark: var(--color-gray-600);
+
+    --decor-grid-line-light: color-mix(
+      in oklab,
+      var(--color-slate-950) 4%,
+      transparent
+    );
+    --decor-grid-line-dark: color-mix(
+      in oklab,
+      var(--color-slate-50) 4%,
+      transparent
+    );
+    --decor-grid-dot-light: color-mix(
+      in oklab,
+      var(--color-slate-950) 5%,
+      transparent
+    );
+    --decor-grid-dot-dark: color-mix(
+      in oklab,
+      var(--color-slate-50) 5%,
+      transparent
+    );
+    --decor-grid-glow-light: color-mix(
+      in oklab,
+      var(--color-neutral-400) 10%,
+      transparent
+    );
+    --decor-grid-glow-dark: color-mix(
+      in oklab,
+      var(--color-neutral-400) 15%,
+      transparent
+    );
+
+    --surface-01: var(--surface-01-light);
+    --surface-02: var(--surface-02-light);
+    --surface-03: var(--surface-03-light);
+    --surface-04: var(--surface-04-light);
+    --fg-01: var(--fg-01-light);
+    --fg-02: var(--fg-02-light);
+    --fg-03: var(--fg-03-light);
+    --border-01: var(--border-01-light);
+    --border-02: var(--border-02-light);
+    --border-03: var(--border-03-light);
+    --selection: var(--selection-light);
+    --decor-grid-line: var(--decor-grid-line-light);
+    --decor-grid-dot: var(--decor-grid-dot-light);
+    --decor-grid-glow: var(--decor-grid-glow-light);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    html {
+      --surface-01: var(--surface-01-dark);
+      --surface-02: var(--surface-02-dark);
+      --surface-03: var(--surface-03-dark);
+      --surface-04: var(--surface-04-dark);
+      --fg-01: var(--fg-01-dark);
+      --fg-02: var(--fg-02-dark);
+      --fg-03: var(--fg-03-dark);
+      --border-01: var(--border-01-dark);
+      --border-02: var(--border-02-dark);
+      --border-03: var(--border-03-dark);
+      --selection: var(--selection-dark);
+      --decor-grid-line: var(--decor-grid-line-dark);
+      --decor-grid-dot: var(--decor-grid-dot-dark);
+      --decor-grid-glow: var(--decor-grid-glow-dark);
+    }
+  }
+
+  @supports (color: light-dark(white, black)) {
+    html {
+      --surface-01: light-dark(var(--surface-01-light), var(--surface-01-dark));
+      --surface-02: light-dark(var(--surface-02-light), var(--surface-02-dark));
+      --surface-03: light-dark(var(--surface-03-light), var(--surface-03-dark));
+      --surface-04: light-dark(var(--surface-04-light), var(--surface-04-dark));
+      --fg-01: light-dark(var(--fg-01-light), var(--fg-01-dark));
+      --fg-02: light-dark(var(--fg-02-light), var(--fg-02-dark));
+      --fg-03: light-dark(var(--fg-03-light), var(--fg-03-dark));
+      --border-01: light-dark(var(--border-01-light), var(--border-01-dark));
+      --border-02: light-dark(var(--border-02-light), var(--border-02-dark));
+      --border-03: light-dark(var(--border-03-light), var(--border-03-dark));
+      --selection: light-dark(var(--selection-light), var(--selection-dark));
+      --decor-grid-line: light-dark(
+        var(--decor-grid-line-light),
+        var(--decor-grid-line-dark)
+      );
+      --decor-grid-dot: light-dark(
+        var(--decor-grid-dot-light),
+        var(--decor-grid-dot-dark)
+      );
+      --decor-grid-glow: light-dark(
+        var(--decor-grid-glow-light),
+        var(--decor-grid-glow-dark)
+      );
+    }
   }
 
   body {
@@ -92,18 +202,77 @@
   }
 }
 
+.shiki {
+  color-scheme: light dark;
+  overflow-x: auto;
+  color: var(--shiki-light);
+  background-color: var(--shiki-light-bg);
+}
+
+.shiki span {
+  color: var(--shiki-light);
+}
+
 @media (prefers-color-scheme: dark) {
-  .shiki,
-  .shiki span {
-    color: var(--shiki-dark) !important;
+  .shiki {
+    color: var(--shiki-dark);
+    background-color: var(--shiki-dark-bg);
   }
 
-  .shiki {
-    background-color: var(--shiki-dark-bg) !important;
+  .shiki span {
+    color: var(--shiki-dark);
   }
 
   .shiki span[style*='--shiki-dark-bg'] {
-    background-color: var(--shiki-dark-bg) !important;
+    background-color: var(--shiki-dark-bg);
+  }
+}
+
+@supports (color: light-dark(white, black)) {
+  .shiki {
+    color: light-dark(var(--shiki-light), var(--shiki-dark));
+    background-color: light-dark(var(--shiki-light-bg), var(--shiki-dark-bg));
+  }
+
+  .shiki span {
+    color: light-dark(var(--shiki-light), var(--shiki-dark));
+  }
+
+  .shiki span[style*='--shiki-light-bg'],
+  .shiki span[style*='--shiki-dark-bg'] {
+    background-color: light-dark(var(--shiki-light-bg), var(--shiki-dark-bg));
+  }
+}
+
+.toc-nav {
+  scroll-target-group: auto;
+}
+
+.toc-nav a:is(:target-current, .toc-current) {
+  color: var(--color-accent);
+}
+
+.toc-nav a:is(:target-current, .toc-current)::before {
+  background-color: var(--color-accent);
+}
+
+/* Overflow scrollers can leave :target-current stuck on the first marker.
+   IntersectionObserver .toc-current is the source of truth in that case. */
+.toc-nav a:target-current:not(.toc-current) {
+  color: inherit;
+}
+
+.toc-nav a:target-current:not(.toc-current)::before {
+  background-color: transparent;
+}
+
+@supports (position-anchor: --toc-active) {
+  .toc-nav a:is(:target-current, .toc-current) {
+    anchor-name: --toc-active;
+  }
+
+  .toc-nav a:target-current:not(.toc-current) {
+    anchor-name: none;
   }
 }
 

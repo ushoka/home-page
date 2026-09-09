@@ -1,40 +1,10 @@
 'use client';
 
-import { useLayoutEffect, useState, useRef, useCallback } from 'react';
-import { useScroll } from '@/hooks/useScroll';
+import { useEffect, useRef, useState } from 'react';
 import { SCROLL_CONTAINER_ID } from '@/libs/constants/scroll';
 import { cn } from '@/libs/utils/classNames';
 
 export type Toc = { text: string; id: string; level: number };
-
-function findActiveIndexFromScrollPosition(tableOfContents: Toc[]): number {
-  const scrollContainer = document.getElementById(SCROLL_CONTAINER_ID);
-  if (!scrollContainer) return 0;
-
-  const containerTop = scrollContainer.getBoundingClientRect().top;
-
-  const headingTops: { id: string; top: number }[] = [];
-  document.querySelectorAll('h2, h3').forEach(heading => {
-    const relativeTop = heading.getBoundingClientRect().top - containerTop;
-    headingTops.push({
-      id: heading.id,
-      // Math.round to prevent fractional scroll positions
-      top: Math.round(relativeTop),
-    });
-  });
-
-  const activeHeading = headingTops.find((heading, index) => {
-    const currentTop = heading.top;
-    const nextTop = headingTops[index + 1]?.top;
-    return currentTop <= 0 && (nextTop == undefined || nextTop > 0);
-  });
-
-  if (!activeHeading) return 0;
-  const foundIndex = tableOfContents.findIndex(
-    toc => toc.id === activeHeading.id,
-  );
-  return foundIndex >= 0 ? foundIndex : 0;
-}
 
 function scrollToHashFragment(hash: string): boolean {
   const targetElement = document.getElementById(hash);
@@ -50,7 +20,6 @@ function scrollToHashFragment(hash: string): boolean {
     currentScrollTop + (targetRect.top - containerRect.top);
 
   scrollContainer.scrollTo({
-    // Math.round to prevent fractional scroll positions
     top: Math.round(targetScrollTop),
     behavior: 'instant',
   });
@@ -58,40 +27,138 @@ function scrollToHashFragment(hash: string): boolean {
   return true;
 }
 
+function getActiveIndexFromLink(
+  tableOfContents: Toc[],
+  link: Element | null,
+): number {
+  const href = link?.getAttribute('href');
+  if (!href) return 0;
+  const id = href.slice(1);
+  const foundIndex = tableOfContents.findIndex(toc => toc.id === id);
+  return foundIndex >= 0 ? foundIndex : 0;
+}
+
 export const TableOfContents: React.FC<{
   tableOfContents: Toc[];
   className?: string;
 }> = ({ tableOfContents, className }) => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const hasInitialized = useRef(false);
+  const navRef = useRef<HTMLElement>(null);
+  const didScrollToHash = useRef(false);
 
-  const handleScroll = useCallback(() => {
-    const newActiveIndex = findActiveIndexFromScrollPosition(tableOfContents);
-    setActiveIndex(newActiveIndex);
-  }, [tableOfContents]);
+  useEffect(() => {
+    const nav = navRef.current;
+    const scrollContainer = document.getElementById(SCROLL_CONTAINER_ID);
+    if (!nav || !scrollContainer) return;
 
-  useScroll(handleScroll);
-
-  // Handle initial fragment scroll and sync active index with URL hash.
-  useLayoutEffect(() => {
-    if (hasInitialized.current) return;
-    hasInitialized.current = true;
-
-    const hash = window.location.hash.slice(1); // Remove the '#'
-
-    if (hash) {
-      const hashIndex = tableOfContents.findIndex(toc => toc.id === hash);
-
-      if (hashIndex >= 0) {
+    if (!didScrollToHash.current) {
+      didScrollToHash.current = true;
+      const hash = window.location.hash.slice(1);
+      if (hash) {
         scrollToHashFragment(hash);
-        // eslint-disable-next-line react-hooks/set-state-in-effect
-        setActiveIndex(hashIndex);
-        return;
       }
     }
 
-    handleScroll();
-  }, [tableOfContents, handleScroll]);
+    const applyActiveId = (id: string) => {
+      const foundIndex = tableOfContents.findIndex(toc => toc.id === id);
+      if (foundIndex < 0) return;
+      setActiveIndex(foundIndex);
+    };
+
+    const syncFromNative = () => {
+      const currentLink = nav.querySelector('a:target-current');
+      if (!currentLink) return false;
+      setActiveIndex(getActiveIndexFromLink(tableOfContents, currentLink));
+      return true;
+    };
+
+    const visibleHeadings = new Map<string, boolean>();
+
+    const observer = new IntersectionObserver(
+      entries => {
+        for (const entry of entries) {
+          visibleHeadings.set(entry.target.id, entry.isIntersecting);
+        }
+
+        const current = tableOfContents.findLast(toc =>
+          visibleHeadings.get(toc.id),
+        );
+        if (current) {
+          applyActiveId(current.id);
+        } else if (scrollContainer.scrollTop < 16 && tableOfContents[0]) {
+          applyActiveId(tableOfContents[0].id);
+        }
+      },
+      {
+        root: scrollContainer,
+        // Expand the observation rect above the scroller so headings that
+        // have scrolled past still count; findLast then picks the current one.
+        rootMargin: '10000px 0px -60% 0px',
+        threshold: 0,
+      },
+    );
+
+    tableOfContents.forEach(toc => {
+      const heading = document.getElementById(toc.id);
+      if (heading) observer.observe(heading);
+    });
+
+    // Native :target-current tracks the viewport today, not overflow
+    // scrollers. Keep it as the preferred source when it actually moves;
+    // IntersectionObserver covers the custom #scroll-container.
+    if (CSS.supports('scroll-target-group: auto')) {
+      const previousNativeIndex = { current: -1 };
+
+      const syncIfNativeMoved = () => {
+        const currentLink = nav.querySelector('a:target-current');
+        const nextIndex = getActiveIndexFromLink(tableOfContents, currentLink);
+        if (nextIndex === previousNativeIndex.current) return;
+        previousNativeIndex.current = nextIndex;
+        if (currentLink) {
+          setActiveIndex(nextIndex);
+        }
+      };
+
+      const frame = requestAnimationFrame(() => {
+        syncFromNative();
+        previousNativeIndex.current = getActiveIndexFromLink(
+          tableOfContents,
+          nav.querySelector('a:target-current'),
+        );
+      });
+      scrollContainer.addEventListener('scrollend', syncIfNativeMoved, {
+        passive: true,
+      });
+
+      return () => {
+        cancelAnimationFrame(frame);
+        scrollContainer.removeEventListener('scrollend', syncIfNativeMoved);
+        observer.disconnect();
+      };
+    }
+
+    return () => observer.disconnect();
+  }, [tableOfContents]);
+
+  function handleNavClick(event: React.MouseEvent<HTMLAnchorElement>) {
+    const href = event.currentTarget.getAttribute('href');
+    if (!href?.startsWith('#')) return;
+
+    const id = href.slice(1);
+    if (!document.getElementById(id)) return;
+
+    event.preventDefault();
+    window.history.pushState(null, '', href);
+    scrollToHashFragment(id);
+    applyActiveFromId(id);
+  }
+
+  function applyActiveFromId(id: string) {
+    const foundIndex = tableOfContents.findIndex(toc => toc.id === id);
+    if (foundIndex >= 0) {
+      setActiveIndex(foundIndex);
+    }
+  }
 
   return (
     <aside
@@ -101,7 +168,12 @@ export const TableOfContents: React.FC<{
         className,
       )}
     >
-      <nav id="toc" aria-label="Table of contents">
+      <nav
+        id="toc"
+        ref={navRef}
+        aria-label="Table of contents"
+        className="toc-nav"
+      >
         <div className="relative">
           <span
             aria-hidden="true"
@@ -117,18 +189,18 @@ export const TableOfContents: React.FC<{
           />
           <ul className="flex flex-col gap-1 py-2">
             {tableOfContents.map((toc, index) => (
-              <li key={toc.id} className={cn('text-sm font-medium')}>
+              <li key={toc.id} className="text-sm font-medium">
                 <a
                   href={`#${toc.id}`}
-                  aria-current={activeIndex === index ? 'location' : false}
+                  aria-current={activeIndex === index ? 'location' : undefined}
                   className={cn(
                     'relative block px-2 text-base leading-[1.1] no-underline hover:underline',
                     toc.level === 3 ? 'ml-4 py-0.5 text-sm text-fg-02' : 'py-1',
-                    activeIndex === index &&
-                      'text-accent before:bg-accent [@supports(position-anchor:--toc-active)]:[anchor-name:--toc-active]',
                     'before:absolute before:bottom-1 before:left-0 before:top-1 before:block before:w-0.75 before:rounded-sm before:motion-safe:transition-colors before:content-[""]',
                     '[@supports(position-anchor:--toc-active)]:before:hidden',
+                    activeIndex === index && 'toc-current',
                   )}
+                  onClick={handleNavClick}
                 >
                   {toc.text}
                 </a>

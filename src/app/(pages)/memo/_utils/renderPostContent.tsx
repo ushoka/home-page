@@ -148,7 +148,6 @@ function renderBlock({
 
       const imageElement = (
         <PostImage
-          preload
           publicId={image.public_id}
           width={768}
           originalWidth={image.width}

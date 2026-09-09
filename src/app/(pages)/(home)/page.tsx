@@ -218,18 +218,22 @@ export default async function Home() {
           memo
         </h2>
         <ul className="mt-4 flex flex-col gap-2">
-          {posts?.map(post => (
-            <li key={post.id}>
-              <PostCard
-                title={convertRichTextToPlainText(post.properties.Page.title)}
-                href={`/memo/${convertRichTextToPlainText(
-                  post.properties.Slug.rich_text,
-                )}`}
-                date={post.properties.Date.date.start}
-                tags={post.properties.Tags.multi_select}
-              />
-            </li>
-          ))}
+          {posts?.map(post => {
+            const slug = convertRichTextToPlainText(
+              post.properties.Slug.rich_text,
+            );
+            return (
+              <li key={post.id}>
+                <PostCard
+                  title={convertRichTextToPlainText(post.properties.Page.title)}
+                  slug={slug}
+                  href={`/memo/${slug}`}
+                  date={post.properties.Date.date.start}
+                  tags={post.properties.Tags.multi_select}
+                />
+              </li>
+            );
+          })}
         </ul>
       </section>
     </div>

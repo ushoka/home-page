@@ -1,11 +1,12 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { Suspense } from 'react';
+import { Suspense, ViewTransition } from 'react';
 import { PostImage } from '@/app/(pages)/memo/_components/PostImage';
 import { PostTag } from '@/app/(pages)/memo/_components/PostTag';
 import { getPostBySlug } from '@/app/(pages)/memo/_utils/getPostBySlug';
 import { getPosts } from '@/app/(pages)/memo/_utils/getPosts';
 import { renderPostContent } from '@/app/(pages)/memo/_utils/renderPostContent';
+import { memoTitleViewTransitionName } from '@/app/(pages)/memo/_utils/viewTransitionNames';
 import {
   TableOfContents,
   type Toc,
@@ -119,7 +120,9 @@ async function CachedPost({ slug }: { slug: string }) {
       )}
       <Article className="prose-figcaption:mt-[0.5em] prose-pre:m-0">
         <div className="mb-8">
-          <h1>{title}</h1>
+          <ViewTransition name={memoTitleViewTransitionName(slug)}>
+            <h1>{title}</h1>
+          </ViewTransition>
           <time
             dateTime={properties.Date.date.start}
             className="mb-1 block text-fg-02"
