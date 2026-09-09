@@ -38,9 +38,18 @@ function getHighlighterLanguage(lang: string): HighLightLanguage {
 export function highlightCodeToHtml(text: string, language: string) {
   return highlighter.codeToHtml(text, {
     lang: getHighlighterLanguage(language),
+    defaultColor: false,
     themes: {
       dark: darkTheme.name,
       light: lightTheme.name,
     },
+    transformers: [
+      {
+        name: 'keyboard-scroll',
+        pre(node) {
+          node.properties.tabindex = '0';
+        },
+      },
+    ],
   });
 }

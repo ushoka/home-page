@@ -12,7 +12,7 @@ export default function ErrorPage({ error, reset }: ErrorPageProps) {
     console.error(error);
   }, [error]);
   return (
-    <main className="flex flex-col items-center">
+    <div className="flex flex-col items-center">
       <h1 className="text-2xl font-bold">Something went wrong!</h1>
       <button
         type="button"
@@ -21,6 +21,6 @@ export default function ErrorPage({ error, reset }: ErrorPageProps) {
       >
         Try again
       </button>
-    </main>
+    </div>
   );
 }
