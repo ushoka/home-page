@@ -50,6 +50,6 @@ export const MemoPostSchema = z
       }),
     }),
   })
-  .merge(PageSchema);
+  .extend(PageSchema.shape);
 
 export type MemoPost = z.infer<typeof MemoPostSchema>;
