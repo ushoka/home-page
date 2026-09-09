@@ -227,7 +227,6 @@ export default async function Home() {
                 )}`}
                 date={post.properties.Date.date.start}
                 tags={post.properties.Tags.multi_select}
-                className="h-full w-full rotate-0 scale-100 shadow-md z-0 motion-safe:transition-all duration-250 motion-safe:hover:scale-105 motion-safe:hover:shadow-xl motion-safe:hover:z-10"
               />
             </li>
           ))}

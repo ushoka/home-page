@@ -17,7 +17,7 @@ export const PostCard = <T extends string>(props: {
     <Link
       href={href}
       className={cn(
-        'inline-block overflow-hidden rounded-lg border-2 border-border-03 bg-surface-04 text-fg-01 no-underline',
+        'inline-block h-full w-full overflow-hidden rounded-lg border-2 border-border-03 bg-surface-04 text-fg-01 no-underline rotate-0 scale-100 shadow-md z-0 motion-safe:transition-[scale,box-shadow] motion-safe:duration-250 motion-safe:hover:scale-105 motion-safe:hover:shadow-xl motion-safe:hover:z-10',
         className,
       )}
     >
