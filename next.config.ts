@@ -8,9 +8,6 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   reactCompiler: true,
   cacheComponents: true,
-  experimental: {
-    viewTransition: true,
-  },
   images: {
     remotePatterns: [
       {
