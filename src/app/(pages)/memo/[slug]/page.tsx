@@ -1,7 +1,6 @@
-'use cache';
-
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import { Suspense } from 'react';
 import { PostImage } from '@/app/(pages)/memo/_components/PostImage';
 import { PostTag } from '@/app/(pages)/memo/_components/PostTag';
 import { getPostBySlug } from '@/app/(pages)/memo/_utils/getPostBySlug';
@@ -26,6 +25,7 @@ interface MemoPageProps {
 export async function generateStaticParams(): Promise<
   Awaited<MemoPageProps['params']>[]
 > {
+  'use cache';
   const posts = await getPosts({ ignoreDraft: true });
   return (
     posts?.map(post => ({
@@ -37,8 +37,12 @@ export async function generateStaticParams(): Promise<
 export async function generateMetadata(
   props: MemoPageProps,
 ): Promise<Metadata> {
-  const params = await props.params;
-  const { slug } = params;
+  const { slug } = await props.params;
+  return getMemoMetadata(slug);
+}
+
+async function getMemoMetadata(slug: string): Promise<Metadata> {
+  'use cache';
   const post = await getPostBySlug(slug);
 
   if (!post) {
@@ -82,9 +86,21 @@ export async function generateMetadata(
   };
 }
 
-export default async function Post(props: MemoPageProps) {
-  const params = await props.params;
-  const { slug } = params;
+export default function Post(props: MemoPageProps) {
+  return (
+    <Suspense fallback={<PostFallback />}>
+      <PostContent params={props.params} />
+    </Suspense>
+  );
+}
+
+async function PostContent({ params }: Pick<MemoPageProps, 'params'>) {
+  const { slug } = await params;
+  return <CachedPost slug={slug} />;
+}
+
+async function CachedPost({ slug }: { slug: string }) {
+  'use cache';
   const post = await getPostBySlug(slug);
   if (!post) {
     notFound();
@@ -94,55 +110,77 @@ export default async function Post(props: MemoPageProps) {
   const tableOfContents = getTableOfContent(blocks);
 
   return (
-    <>
-      <div className="isolate mx-auto flex items-start justify-center gap-4">
-        {tableOfContents.length > 0 && (
-          <TableOfContents
-            className="sticky top-4 max-h-[calc(100dvh-2rem)] order-last hidden lg:block"
-            tableOfContents={tableOfContents}
-          />
-        )}
-        <Article className="prose-figcaption:mt-[0.5em] prose-pre:m-0">
-          <div className="mb-8">
-            <h1>{title}</h1>
-            <time
-              dateTime={properties.Date.date.start}
-              className="mb-1 block text-fg-02"
-            >
-              {formatDate(properties.Date.date.start)}
-            </time>
-            {properties.Tags.multi_select.length > 0 && (
-              <div className="space-x-2">
-                {properties.Tags.multi_select.map(tag => (
-                  <PostTag key={tag.name} name={tag.name} />
-                ))}
-              </div>
-            )}
-            <hr className="border" />
-            {coverImage && (
-              <PostImage
-                preload
-                publicId={coverImage.public_id}
-                originalWidth={coverImage.width}
-                originalHeight={coverImage.height}
-                alt=""
-                sizes="800px"
-                className="mx-auto h-auto w-full rounded-lg border-2 border-border-01 bg-surface-01 object-contain"
-              />
-            )}
-          </div>
-          <div>{renderPostContent({ blocks, images })}</div>
-          {properties.UpdatedAt.date && (
-            <time
-              dateTime={properties.UpdatedAt.date.start}
-              className="mt-12 block italic text-fg-03"
-            >
-              Updated on {formatDate(properties.UpdatedAt.date.start)}
-            </time>
+    <div className="isolate mx-auto flex items-start justify-center gap-4">
+      {tableOfContents.length > 0 && (
+        <TableOfContents
+          className="sticky top-4 max-h-[calc(100dvh-2rem)] order-last hidden lg:block"
+          tableOfContents={tableOfContents}
+        />
+      )}
+      <Article className="prose-figcaption:mt-[0.5em] prose-pre:m-0">
+        <div className="mb-8">
+          <h1>{title}</h1>
+          <time
+            dateTime={properties.Date.date.start}
+            className="mb-1 block text-fg-02"
+          >
+            {formatDate(properties.Date.date.start)}
+          </time>
+          {properties.Tags.multi_select.length > 0 && (
+            <div className="space-x-2">
+              {properties.Tags.multi_select.map(tag => (
+                <PostTag key={tag.name} name={tag.name} />
+              ))}
+            </div>
           )}
-        </Article>
-      </div>
-    </>
+          <hr className="border" />
+          {coverImage && (
+            <PostImage
+              preload
+              publicId={coverImage.public_id}
+              originalWidth={coverImage.width}
+              originalHeight={coverImage.height}
+              alt=""
+              sizes="800px"
+              className="mx-auto h-auto w-full rounded-lg border-2 border-border-01 bg-surface-01 object-contain"
+            />
+          )}
+        </div>
+        <div>{renderPostContent({ blocks, images })}</div>
+        {properties.UpdatedAt.date && (
+          <time
+            dateTime={properties.UpdatedAt.date.start}
+            className="mt-12 block italic text-fg-03"
+          >
+            Updated on {formatDate(properties.UpdatedAt.date.start)}
+          </time>
+        )}
+      </Article>
+    </div>
+  );
+}
+
+function PostFallback() {
+  return (
+    <div
+      className="isolate mx-auto flex items-start justify-center gap-4"
+      aria-busy="true"
+      aria-live="polite"
+    >
+      <p className="sr-only">Loading article</p>
+      <Article>
+        <div className="mb-8" aria-hidden="true">
+          <div className="h-10 w-3/4 rounded-md bg-surface-04 motion-safe:animate-pulse" />
+          <div className="mt-4 mb-1 h-4 w-32 rounded-md bg-surface-04 motion-safe:animate-pulse" />
+          <hr className="border" />
+          <div className="space-y-3">
+            <div className="h-4 w-full rounded-md bg-surface-04 motion-safe:animate-pulse" />
+            <div className="h-4 w-11/12 rounded-md bg-surface-04 motion-safe:animate-pulse" />
+            <div className="h-4 w-4/5 rounded-md bg-surface-04 motion-safe:animate-pulse" />
+          </div>
+        </div>
+      </Article>
+    </div>
   );
 }
 

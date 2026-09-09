@@ -54,5 +54,6 @@ memo/
 | React Compiler         | `reactCompiler: true`                   | Automatic memoization       |
 | View Transitions       | React `<ViewTransition>`                | Page transition animations  |
 | Component Caching      | `cacheComponents: true`                 | Server component caching    |
+| Partial Prefetching    | `partialPrefetching: true`              | Prefetch App Shells + URL data |
 | Draft Mode             | Built-in                                | Content preview from Notion |
 | On-demand Revalidation | API routes in `src/app/api/revalidate/` | Cache invalidation          |
