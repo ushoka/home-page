@@ -3,7 +3,7 @@ import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import type { Viewport } from 'next';
 import { Google_Sans_Code, Google_Sans_Flex, Outfit } from 'next/font/google';
-import { ViewTransition } from 'react';
+import { Suspense, ViewTransition } from 'react';
 import { A11yReporter } from '@/components/A11yReporter';
 import { AppBackground } from '@/components/AppBackground';
 import { DraftStatusToast } from '@/components/DraftModeStatusToast';
@@ -38,6 +38,10 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
 };
+
+// The shared shell (header, footer, background) is static. Draft mode is
+// request-specific and resolves inside Suspense, after the shell.
+export const ensureStatic = 'shell';
 
 export default function RootLayout({
   children,
@@ -74,7 +78,9 @@ export default function RootLayout({
               </div>
               <Footer />
             </div>
-            <DraftStatusToast className="z-10" />
+            <Suspense fallback={null}>
+              <DraftStatusToast className="z-10" />
+            </Suspense>
           </ViewTransition>
           {process.env.NODE_ENV !== 'production' && <A11yReporter />}
           {process.env.NODE_ENV === 'production' && <Analytics />}

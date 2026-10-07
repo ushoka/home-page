@@ -68,13 +68,14 @@ Ask the user to resolve before proceeding.
 Extract ONLY what belongs in the root agent file. The root should be minimal - information that applies to **every single task**.
 
 **Essential content (keep in root):**
-| Category | Example |
-|----------|---------|
-| Project description | One sentence: "A React dashboard for analytics" |
-| Package manager | Only if not npm (e.g., "Uses pnpm") |
-| Non-standard commands | Custom build/test/typecheck commands |
-| Critical overrides | Things that MUST override defaults |
-| Universal rules | Applies to 100% of tasks |
+
+| Category              | Example                                         |
+| --------------------- | ----------------------------------------------- |
+| Project description   | One sentence: "A React dashboard for analytics" |
+| Package manager       | Only if not npm (e.g., "Uses pnpm")             |
+| Non-standard commands | Custom build/test/typecheck commands            |
+| Critical overrides    | Things that MUST override defaults              |
+| Universal rules       | Applies to 100% of tasks                        |
 
 **NOT essential (move to linked files):**
 
@@ -92,16 +93,17 @@ Extract ONLY what belongs in the root agent file. The root should be minimal - i
 Organize remaining instructions into logical categories.
 
 **Common categories:**
-| Category | Contents |
-|----------|----------|
-| `typescript.md` | TS conventions, type patterns, strict mode rules |
-| `testing.md` | Test frameworks, coverage, mocking patterns |
-| `code-style.md` | Formatting, naming, comments, structure |
-| `git-workflow.md` | Commits, branches, PRs, reviews |
-| `architecture.md` | Patterns, folder structure, dependencies |
-| `api-design.md` | REST/GraphQL conventions, error handling |
-| `security.md` | Auth patterns, input validation, secrets |
-| `performance.md` | Optimization rules, caching, lazy loading |
+
+| Category          | Contents                                         |
+| ----------------- | ------------------------------------------------ |
+| `typescript.md`   | TS conventions, type patterns, strict mode rules |
+| `testing.md`      | Test frameworks, coverage, mocking patterns      |
+| `code-style.md`   | Formatting, naming, comments, structure          |
+| `git-workflow.md` | Commits, branches, PRs, reviews                  |
+| `architecture.md` | Patterns, folder structure, dependencies         |
+| `api-design.md`   | REST/GraphQL conventions, error handling         |
+| `security.md`     | Auth patterns, input validation, secrets         |
+| `performance.md`  | Optimization rules, caching, lazy loading        |
 
 **Grouping rules:**
 
@@ -194,13 +196,14 @@ Brief context for when these guidelines apply.
 Identify instructions that should be removed entirely.
 
 **Delete if:**
-| Criterion | Example | Why Delete |
-|-----------|---------|------------|
-| Redundant | "Use TypeScript" (in a .ts project) | Agent already knows |
-| Too vague | "Write clean code" | Not actionable |
-| Overly obvious | "Don't introduce bugs" | Wastes context |
-| Default behavior | "Use descriptive variable names" | Standard practice |
-| Outdated | References deprecated APIs | No longer applies |
+
+| Criterion        | Example                             | Why Delete          |
+| ---------------- | ----------------------------------- | ------------------- |
+| Redundant        | "Use TypeScript" (in a .ts project) | Agent already knows |
+| Too vague        | "Write clean code"                  | Not actionable      |
+| Overly obvious   | "Don't introduce bugs"              | Wastes context      |
+| Default behavior | "Use descriptive variable names"    | Standard practice   |
+| Outdated         | References deprecated APIs          | No longer applies   |
 
 **Output format:**
 

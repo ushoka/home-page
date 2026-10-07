@@ -1,7 +1,6 @@
-'use cache';
-
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import { Suspense } from 'react';
 import { PostImage } from '@/app/(pages)/memo/_components/PostImage';
 import { PostTag } from '@/app/(pages)/memo/_components/PostTag';
 import { getPostBySlug } from '@/app/(pages)/memo/_utils/getPostBySlug';
@@ -37,6 +36,7 @@ export async function generateStaticParams(): Promise<
 export async function generateMetadata(
   props: MemoPageProps,
 ): Promise<Metadata> {
+  'use cache';
   const params = await props.params;
   const { slug } = params;
   const post = await getPostBySlug(slug);
@@ -82,9 +82,19 @@ export async function generateMetadata(
   };
 }
 
-export default async function Post(props: MemoPageProps) {
-  const params = await props.params;
-  const { slug } = params;
+export default function Post(props: MemoPageProps) {
+  return (
+    <Suspense
+      fallback={<p className="py-16 text-center text-fg-02">Loading…</p>}
+    >
+      <MemoPost params={props.params} />
+    </Suspense>
+  );
+}
+
+async function MemoPost({ params }: Pick<MemoPageProps, 'params'>) {
+  'use cache';
+  const { slug } = await params;
   const post = await getPostBySlug(slug);
   if (!post) {
     notFound();
