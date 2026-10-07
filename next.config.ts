@@ -8,9 +8,9 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   reactCompiler: true,
   cacheComponents: true,
-  experimental: {
-    viewTransition: true,
-  },
+  // Keep the pre-16.3 prefetch behavior. Partial Prefetching changes what
+  // <Link> downloads and is a separate adoption from this upgrade.
+  partialPrefetching: false,
   images: {
     remotePatterns: [
       {
