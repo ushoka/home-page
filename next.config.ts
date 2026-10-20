@@ -9,6 +9,9 @@ const nextConfig: NextConfig = {
   reactCompiler: true,
   cacheComponents: true,
   partialPrefetching: true,
+  experimental: {
+    turbopackRustReactCompiler: true,
+  },
   images: {
     remotePatterns: [
       {
